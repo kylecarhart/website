@@ -1,0 +1,23 @@
+---
+import { presentation } from "@/data/presentation";
+import Link from "./shared/Link.astro";
+
+const { socials } = presentation;
+---
+
+<ul role="list" class="flex flex-row gap-2">
+  {
+    socials.map((social, index) => (
+      <>
+        <li class="flex flex-row items-center gap-2">
+          <Link href={social.link} label={social.label}>
+            {social.icon && <img class="w-3 h-3" src={social.icon} alt={social.label} />} 
+            {social.label}
+          </Link>
+        </li>
+
+        {socials.length - 1 !== index && <li>/</li>}
+      </>
+    ))
+  }
+</ul>
