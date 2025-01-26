@@ -8,6 +8,9 @@ import SkillList from "@/components/SkillList.astro";
 import projects from "@/data/projects";
 import { skills } from "@/data/skills";
 import Layout from "@/layouts/Layout.astro";
+import { Download } from "lucide-react";
+import Github from "../../public/github.svg";
+
 ---
 
 <Layout>
@@ -46,11 +49,25 @@ import Layout from "@/layouts/Layout.astro";
       </Fragment>
       <div class="space-y-8">
        <Project project={projects.runner}>
-        <div>
-          <Button>asdf</Button>
+        <div class="flex gap-4">
+          <Button href="https://github.com/kylecarhart/Runner">
+            <Github class="w-4 h-4" slot="icon" /> Github
+          </Button>
         </div>
        </Project>
-       <Project project={projects.domainFilter}></Project>
+       <Project project={projects.domainFilter}>
+        <div class="flex gap-4">
+          <Button href="https://github.com/kylecarhart/Google-Domain-Filter">
+            <Github class="w-4 h-4" slot="icon" /> Github
+          </Button>
+          <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
+            <Download className="w-4 h-4" slot="icon" /> Chrome
+          </Button> -->
+          <Button href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/">
+            <Download className="w-4 h-4" slot="icon" /> Firefox
+          </Button>
+        </div>
+       </Project>
       </div>
     </Heading>
   </div>
