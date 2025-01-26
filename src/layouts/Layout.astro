@@ -1,7 +1,7 @@
 ---
+import Nav from "@/components/Nav.astro";
 import SEOTags from "@/components/seo/SEOTags.astro";
 import type { HeadTags } from "@/utils/types/HeadTags";
-import Nav from "../components/Nav.astro";
 
 import "@/styles/globals.css";
 import "@/styles/tailwind.css";
@@ -16,7 +16,7 @@ const headTags = Astro.props;
   <SEOTags {...headTags} />
   <body class="background min-h-screen text-default font-sans">
     <Nav />
-    <div class="max-w-main mx-auto">
+    <div class="max-w-main mx-auto px-4 sm:px-8">
       <slot />
     </div>
   </body>
