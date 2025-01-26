@@ -8,12 +8,16 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-<div class="flex flex-col gap-2">
-  <span class="text-2xl font-semibold">{project.title}</span>
-  <span class="text-lg max-w-prose">{project.description}</span>
-  <ul class="flex flex-wrap">
-    {project.tech.map((tech) => (
-      <li class="text-sm font-mono after:not:last:content-['·'] after:mx-2">{tech}</li>
-    ))}
-  </ul>
+
+<div class="flex gap-4">
+  <div class="w-1 bg-primary rounded-full"></div> {/* Vertical line */}
+  <div class="space-y-4">
+    <div class="text-2xl font-semibold">{project.title}</div>
+    <div class="text-lg max-w-prose">{project.description}</div>
+    <ul class="flex flex-wrap">
+      {project.tech.map((tech) => (
+        <li class="text-sm font-mono not-last:after:content-['·'] not-last:after:mx-1">{tech}</li>
+      ))}
+    </ul>
+  </div>
 </div>

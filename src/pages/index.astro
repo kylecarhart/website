@@ -17,7 +17,7 @@ import Layout from "@/layouts/Layout.astro";
         I am a <strong>Senior Full Stack Developer</strong> from Fayetteville, NC with over 6 years of professional experience delivering robust, quality user experiences using a vast range of technologies and frameworks.
       </Fragment>
     </Heading>
-
+    
     <!-- What I Know -->
     <Heading title="what i know" align="right">
       <Fragment slot="description">
@@ -40,8 +40,10 @@ import Layout from "@/layouts/Layout.astro";
       <Fragment slot="description">
         Check out some of these cool side projects I have worked on.
       </Fragment>
-      <div>
-        <Project project={projects[0]} />
+      <div class="space-y-8">
+        {projects.map((project) => (
+          <Project project={project} />
+        ))}
       </div>
     </Heading>
   </div>

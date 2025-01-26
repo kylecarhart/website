@@ -13,17 +13,49 @@ interface Props {
 const { title, align = 'left' } = Astro.props;
 ---
 
-<div class="space-y-12">
+<div class="space-y-12 heading">
   <div class:list={[
-    'flex text-4xl',
+    'flex',
     {"sm:-mr-8 text-right flex-row-reverse": align === 'right'}, 
     {"sm:-ml-8 text-left": align === 'left'}
   ]}>
-    <div class="hidden sm:block text-primary font-mono font-bold w-8 text-center">+</div>
+    <div class="hidden sm:block text-primary font-mono font-bold w-8 text-center text-3xl">+</div>
     <div class="space-y-4">
-      <h2 class="font-mono italic">{title}</h2>
+      <h2 class="font-mono italic text-4xl">{title}</h2>
       <p class="text-xl max-w-prose"><slot name="description"/></p>
     </div>
   </div>
   <slot />
 </div>
+
+<style>
+  .heading {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .heading.animate-fade-in {
+    opacity: 1;
+  }
+</style>
+
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-fade-in');
+      }
+    });
+  });
+
+  // Scripts are only ran once, not per usage of the component, so we need to
+  // handle any AND all headings on the page.
+  const headings = document.querySelectorAll('.heading');
+
+  if (headings) {
+    headings.forEach((heading) => {
+      observer.observe(heading);
+    });
+  }
+</script>
