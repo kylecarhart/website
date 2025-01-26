@@ -1,0 +1,50 @@
+---
+
+interface Props {
+}
+
+---
+
+<div class="box inline-flex items-center justify-center px-5 py-2 cursor-pointer">
+  <sh></sh>
+  <span class="font-bold">Github</span>
+</div>
+
+
+{/* https://css-tricks.com/different-ways-to-get-css-gradient-shadows/#cp_embed_ExpLZMz/2eeab3ea368b67035e79fea37fa52e83 */}
+<style>
+  .box {
+  --r: 40px;
+  
+  /* width: var(--w); */
+  /* height: var(--h); */
+  border: 1px solid var(--color-default);
+  border-radius: var(--r);
+  position: relative;
+  transform: translate(0);
+  transform-style: preserve-3d;
+}
+
+.box sh {
+  position: absolute;
+  inset: -150px;
+  border: 150px solid #0000;
+  border-radius: calc(150px + var(--r));
+  transform: translateZ(-1px);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+.box sh:before {
+  content:"";
+  position: absolute;
+  inset: 0;
+  /* transform: translate(10px,8px); */
+  background: var(--color-default);
+  opacity: 0.3;
+  filter: blur(14px);
+  border-radius: var(--r);
+}
+</style>

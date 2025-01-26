@@ -1,63 +1,27 @@
-export interface Skill {
-  name: string;
-  proficient?: boolean;
-}
+import { tech, type Tech } from "./tech";
 
-const languages: Skill[] = [
-  { name: "Typescript", proficient: true },
-  { name: "SQL" },
-  { name: "Java" },
-  { name: "C#" },
+const languages: Tech[] = [tech.ts, tech.sql, tech.java, tech.csharp];
+const frontend: Tech[] = [tech.react, tech.next, tech.astro, tech.redux];
+const backend: Tech[] = [
+  tech.nodejs,
+  tech.hono,
+  tech.express,
+  tech.fastify,
+  tech.koa,
+  tech.nestjs,
 ];
-
-const frontend: Skill[] = [
-  { name: "React", proficient: true },
-  { name: "Next.js" },
-  { name: "Astro" },
-  { name: "Redux" },
+const libraries: Tech[] = [
+  tech.tailwind,
+  tech.zod,
+  tech.jest,
+  tech.vitest,
+  tech.drizzle,
+  tech.cva,
 ];
-
-const backend: Skill[] = [
-  { name: "Node.js", proficient: true },
-  { name: "Hono", proficient: true },
-  { name: "Express" },
-  { name: "Fastify" },
-  { name: "Koa" },
-  { name: "Nest.js" },
-];
-
-const libraries: Skill[] = [
-  { name: "Tailwind CSS", proficient: true },
-  { name: "Zod" },
-  { name: "Jest" },
-  { name: "Vitest" },
-  { name: "cva" },
-  { name: "drizzle" },
-];
-
-const cloud: Skill[] = [
-  { name: "Cloudflare", proficient: true },
-  { name: "Azure" },
-];
-
-const tools: Skill[] = [
-  { name: "Figma", proficient: true },
-  { name: "Git" },
-  { name: "Docker" },
-  { name: "Postman" },
-];
-
-const database: Skill[] = [
-  { name: "PostgreSQL", proficient: true },
-  { name: "Oracle" },
-  { name: "SQLite" },
-  { name: "Cloudflare D1" },
-];
-
-const specs: Skill[] = [
-  { name: "OpenAPI", proficient: true },
-  { name: "JSON Schema" },
-];
+const cloud: Tech[] = [tech.cfp, tech.azure];
+const tools: Tech[] = [tech.figma, tech.git, tech.docker, tech.postman];
+const database: Tech[] = [tech.postgresql, tech.oracle, tech.sqlite, tech.cfd1];
+const specs: Tech[] = [tech.openapi, tech.jsonSchema];
 
 export const skills = {
   languages,

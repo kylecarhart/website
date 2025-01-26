@@ -1,4 +1,6 @@
 ---
+import Button from "@/components/Button.astro";
+import Footer from "@/components/Footer.astro";
 import Heading from "@/components/Heading.astro";
 import Hero from "@/components/Hero.astro";
 import Project from "@/components/Project.astro";
@@ -9,7 +11,9 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
-  <Hero />
+  <div class="mt-16 mb-32">
+    <Hero />
+  </div>
   <div class="space-y-20">
     <!-- Who I Am -->
     <Heading title="who i am">
@@ -36,16 +40,23 @@ import Layout from "@/layouts/Layout.astro";
     </Heading>
     
     <!-- What I've Done -->
-    <Heading title="what i've done">
+    <Heading title="what i've done" url="https://www.youtube.com/watch?v=Jrprk5dNboI&t=105s">
       <Fragment slot="description">
         Check out some of these cool side projects I have worked on.
       </Fragment>
       <div class="space-y-8">
-        {projects.map((project) => (
-          <Project project={project} />
-        ))}
+       <Project project={projects.runner}>
+        <div>
+          <Button>asdf</Button>
+        </div>
+       </Project>
+       <Project project={projects.domainFilter}></Project>
       </div>
     </Heading>
+  </div>
+
+  <div class="mt-32">
+    <Footer />
   </div>
 </Layout>
 

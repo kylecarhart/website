@@ -7,10 +7,11 @@
  */
 interface Props {
   title: string;
+  url?: string;
   align?: 'left' | 'right';
 }
 
-const { title, align = 'left' } = Astro.props;
+const { title, align = 'left', url } = Astro.props;
 ---
 
 <div class="space-y-12 heading">
@@ -21,7 +22,7 @@ const { title, align = 'left' } = Astro.props;
   ]}>
     <div class="hidden sm:block text-primary font-mono font-bold w-8 text-center text-3xl">+</div>
     <div class="space-y-4">
-      <h2 class="font-mono italic text-4xl">{title}</h2>
+      <h2 class="font-mono italic text-4xl">{url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}</h2>
       <p class="text-xl max-w-prose"><slot name="description"/></p>
     </div>
   </div>
@@ -30,12 +31,15 @@ const { title, align = 'left' } = Astro.props;
 
 <style>
   .heading {
+    position: relative;
     opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+    top: 10px;
+    transition: all 0.5s ease-out;
   }
 
   .heading.animate-fade-in {
     opacity: 1;
+    top: 0px;
   }
 </style>
 
@@ -47,7 +51,7 @@ const { title, align = 'left' } = Astro.props;
         entry.target.classList.add('animate-fade-in');
       }
     });
-  });
+  }, { threshold: 0.6 });
 
   // Scripts are only ran once, not per usage of the component, so we need to
   // handle any AND all headings on the page.
