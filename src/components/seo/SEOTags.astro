@@ -1,8 +1,8 @@
 ---
-import { SEO } from "astro-seo";
-import { AstroFont } from "astro-font";
-import { SITE_URL } from "@/data/config";
+import { SITE_URL_FULL } from "@/data/config";
 import type { HeadTags } from "@/utils/types/HeadTags";
+import { AstroFont } from "astro-font";
+import { SEO } from "astro-seo";
 
 type Props = HeadTags;
 
@@ -11,7 +11,7 @@ const { title, description, noindex, og } = Astro.props;
 const DEFAULT_TITLE_PAGE = "Astro - Portfolio template";
 const DEFAULT_DESCRIPTION_PAGE =
   "A minimal portfolio template built with Astro and Tailwindcss.";
-const DEFAULT_URL_SITE = SITE_URL;
+const DEFAULT_URL_SITE = SITE_URL_FULL;
 
 const openGraph = {
   title: title || og?.title || DEFAULT_TITLE_PAGE,
@@ -72,7 +72,18 @@ const openGraph = {
         fallback: "sans-serif",
         cssVariable: "font-open-sans",
         googleFontsURL:
-          "https://fonts.googleapis.com/css2?family=Open+Sans&display=swap",
+          "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap",
+      },
+      {
+        src: [],
+        preload: false,
+        display: "swap",
+        selector: "html",
+        name: "Ubuntu Sans Mono",
+        fallback: "sans-serif",
+        cssVariable: "font-ubuntu-sans-mono",
+        googleFontsURL:
+          "https://fonts.googleapis.com/css2?family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap",
       },
     ]}
   />

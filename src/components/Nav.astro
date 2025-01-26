@@ -1,0 +1,26 @@
+---
+import { SITE_URL } from "@/data/config";
+---
+<!-- Do this on scroll -->
+<!-- border-b border-gray-200 shadow-sm backdrop-blur-[1px] -->
+<div class="">
+  <div class="flex items-center py-6 mx-auto max-w-main font-mono text-base italic justify-between">
+    <h1>{SITE_URL}</h1>
+    <nav>
+      <ul class="flex items-center gap-2">
+        <li><a href="#">blog</a></li>
+        <li>|</li>
+        <li><a href="/res.pdf">resume</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+<style>
+  .header-shadow {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(1px);
+  }
+</style>

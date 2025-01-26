@@ -1,9 +1,9 @@
 ---
 import SEOTags from "@/components/seo/SEOTags.astro";
 import type { HeadTags } from "@/utils/types/HeadTags";
-import Header from "../components/Header.astro";
+import Nav from "../components/Nav.astro";
 
-import "@/styles/post.css";
+import "@/styles/globals.css";
 import "@/styles/tailwind.css";
 
 export type Props = HeadTags;
@@ -14,10 +14,20 @@ const headTags = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <SEOTags {...headTags} />
-  <body
-    class="mx-auto flex min-h-screen max-w-4xl flex-col gap-9 bg-purple-50/20 px-10 py-8 text-sm text-neutral-600 md:gap-20 md:py-16"
-  >
-    <Header />
-    <slot />
+  <body class="background min-h-screen text-default">
+    <Nav />
+    <div class="max-w-main mx-auto">
+      <slot />
+    </div>
   </body>
 </html>
+
+
+<style>
+.background {
+  background-image: url('/29.svg'), linear-gradient(90deg, rgba(2,0,36,0.02) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.02) 100%);
+  background-color: #FAFAFA;
+  background-size: 15px, 100%;
+}
+</style>
+

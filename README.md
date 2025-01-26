@@ -1,1 +1,3 @@
-Personal website
+# Dependencies
+
+- pnpm

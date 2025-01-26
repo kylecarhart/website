@@ -7,6 +7,14 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-open-sans)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-ubuntu-sans-mono)", ...defaultTheme.fontFamily.mono],
+      },
+      colors: {
+        primary: "var(--color-primary)",
+        default: "var(--color-default)",
+      },
+      maxWidth: {
+        main: "var(--max-w-main)",
       },
     },
   },

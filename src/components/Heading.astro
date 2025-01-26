@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  align?: 'left' | 'right';
+}
+
+const { title, align = 'left' } = Astro.props;
+---
+
+<div class="space-y-12">
+  <div class:list={[
+    'flex gap-4',
+    align === 'right' && 'flex-row-reverse'
+  ]}>
+    <div class="text-primary text-4xl font-mono font-bold">+</div>
+    <div class="space-y-4">
+      <h2 class:list={[
+        'text-4xl font-mono italic', 
+        {'text-right': align === 'right'}
+      ]}>{title}</h2>
+      <p class:list={[
+        'text-xl max-w-prose',
+        {'text-right': align === 'right'}
+      ]}><slot name="description"/></p>
+    </div>
+  </div>
+  <slot />
+</div>

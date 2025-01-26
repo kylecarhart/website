@@ -1,6 +1,7 @@
 export type Project = {
   title: string;
-  techs: string[];
+  description: string;
+  tech: string[];
   link: string;
   isComingSoon?: boolean;
 };
@@ -29,12 +30,16 @@ const TECH = {
 const projects: Project[] = [
   {
     title: "Project Runner",
-    techs: [TECH.astro, TECH.ts, TECH.react, TECH.hono, TECH.cfw, TECH.cfp],
+    description:
+      "All-in-one platform for running enthusiasts to sign up for events, track stats, and compete with others!",
+    tech: [TECH.astro, TECH.ts, TECH.react, TECH.hono, TECH.cfw, TECH.cfp],
     link: "https://github.com/kylecarhart/Runner",
   },
   {
     title: "Domain Filter for Google™ Search",
-    techs: [TECH.ts, TECH.react, TECH.redux, TECH.webpack, TECH.webExt],
+    description:
+      "Cross platform web extension enabling users to filter domains from search results.",
+    tech: [TECH.ts, TECH.react, TECH.redux, TECH.webpack, TECH.webExt],
     link: "https://github.com/kylecarhart/Google-Domain-Filter",
   },
 ];
