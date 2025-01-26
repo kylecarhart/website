@@ -1,5 +1,5 @@
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
 import { SITE_URL_FULL } from "./src/data/config";
@@ -8,7 +8,7 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), sitemap(), robotsTxt(), react()],
+  integrations: [sitemap(), robotsTxt(), react()],
   site: SITE_URL_FULL,
   markdown: {
     syntaxHighlight: "shiki",
@@ -16,6 +16,9 @@ export default defineConfig({
       theme: "nord",
       wrap: false,
     },
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
   experimental: {
     svg: true,
