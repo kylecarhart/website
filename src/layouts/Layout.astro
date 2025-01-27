@@ -14,9 +14,9 @@ const headTags = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <SEOTags {...headTags} />
-  <body class="background min-h-screen text-default font-sans">
+  <body class="background min-h-screen text-default font-sans center-content">
     <Nav />
-    <div class="max-w-main mx-auto px-4 sm:px-8">
+    <div class="px-4 sm:px-8">
       <slot />
     </div>
   </body>
