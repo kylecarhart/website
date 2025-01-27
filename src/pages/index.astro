@@ -33,8 +33,9 @@ import Github from "../../public/github.svg";
      <div class="opacity-80 bg-default/5">
        <Centered className="flex gap-16 flex-wrap justify-center py-32">
          {companies.map((company) => {
-           const { name, Logo } = company;
+           const { Logo } = company;
            return (
+            // @ts-ignore
              <Logo class="h-10" />
            )
          })}
