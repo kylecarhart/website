@@ -5,6 +5,7 @@ import type { HeadTags } from "@/utils/types/HeadTags";
 
 import "@/styles/globals.css";
 import "@/styles/tailwind.css";
+import Centered from "./Centered.astro";
 
 export type Props = HeadTags;
 
@@ -14,11 +15,11 @@ const headTags = Astro.props;
 <!DOCTYPE html>
 <html lang="en">
   <SEOTags {...headTags} />
-  <body class="background min-h-screen text-default font-sans center-content">
-    <Nav />
-    <div class="px-4 sm:px-8">
-      <slot />
-    </div>
+  <body class="background min-h-screen text-default font-sans">
+    <Centered>
+      <Nav />
+    </Centered>
+    <slot />
   </body>
 </html>
 

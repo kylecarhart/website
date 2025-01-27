@@ -3,8 +3,6 @@ import HpLogo from "../../public/hp.svg";
 import InspireLogo from "../../public/inspire.svg";
 import McDonaldsLogo from "../../public/mcd.svg";
 import RaytheonLogo from "../../public/rtx.svg";
-import UscLogo from "../../public/usc.svg";
-import WalgreensLogo from "../../public/walgreens.svg";
 
 interface Company {
   name: string;
@@ -12,10 +10,10 @@ interface Company {
 }
 
 export const companies: Company[] = [
-  {
-    name: "University of South Carolina",
-    Logo: UscLogo,
-  },
+  // {
+  //   name: "University of South Carolina",
+  //   Logo: UscLogo,
+  // },
   {
     name: "Capgemini",
     Logo: CapgeminiLogo,
@@ -32,10 +30,10 @@ export const companies: Company[] = [
     name: "McDonald's",
     Logo: McDonaldsLogo,
   },
-  {
-    name: "Walgreens",
-    Logo: WalgreensLogo,
-  },
+  // {
+  //   name: "Walgreens",
+  //   Logo: WalgreensLogo,
+  // },
   {
     name: "Inspire Brands",
     Logo: InspireLogo,
