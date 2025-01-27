@@ -6,51 +6,10 @@ interface Props {
 const { href } = Astro.props;
 ---
 
-<a class="box inline-flex items-center justify-center cursor-pointer px-3 py-1" href={href} target="_blank" rel="noopener noreferrer">
+<a class="inline-flex items-center justify-center cursor-pointer px-3 py-1 border-1 rounded-full border-default shadow-[0_0_10px_0_rgba(0,0,0,0.15)] hover:shadow-[0_0_10px_0_rgba(0,0,0,0.3)] transition-all duration-200 ease-in-out" href={href} target="_blank" rel="noopener noreferrer">
   <sh></sh>
   <span class="font-bold text-sm flex items-center gap-2">
     <slot name="icon" />
     <slot />
   </span>
 </a>
-
-
-{/* https://css-tricks.com/different-ways-to-get-css-gradient-shadows/#cp_embed_ExpLZMz/2eeab3ea368b67035e79fea37fa52e83 */}
-<style>
-  .box {
-  --r: 40px;
-  --w: 100px;
-  --h: 40px;
-
-  border: 1px solid var(--color-default);
-  border-radius: var(--r);
-  position: relative;
-  transform: translate(0);
-  transform-style: preserve-3d;
-}
-
-.box sh {
-  pointer-events: none;
-  position: absolute;
-  inset: calc(var(--h) * -1);
-  border: var(--h) solid #0000;
-  border-radius: calc(var(--h) + var(--r));
-  transform: translateZ(-1px);
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-}
-
-.box sh:before {
-  content:"";
-  position: absolute;
-  inset: 0;
-  /* transform: translate(10px,8px); */
-  background: var(--color-default);
-  opacity: 0.3;
-  filter: blur(10px);
-  border-radius: var(--r);
-}
-</style>
