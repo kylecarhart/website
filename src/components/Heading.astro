@@ -22,8 +22,8 @@ const { title, align = 'left', url } = Astro.props;
   ]}>
     <div class="hidden sm:block text-primary font-mono font-bold w-8 text-center text-3xl">+</div>
     <div class="space-y-4">
-      <h2 class="font-mono italic text-4xl">{url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}</h2>
-      <p class="text-xl max-w-prose"><slot name="description"/></p>
+      <h2 class="font-mono italic sm:text-4xl text-3xl">{url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}</h2>
+      <p class="sm:text-xl text-lg max-w-prose"><slot name="description"/></p>
     </div>
   </div>
   <slot />
@@ -51,7 +51,7 @@ const { title, align = 'left', url } = Astro.props;
         entry.target.classList.add('animate-fade-in');
       }
     });
-  }, { threshold: 0.6 });
+  }, { threshold: .25 });
 
   // Scripts are only ran once, not per usage of the component, so we need to
   // handle any AND all headings on the page.

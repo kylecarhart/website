@@ -1,10 +1,12 @@
 ---
+import Centered from "@/layouts/Centered.astro";
+
 ---
 
-<div class="flex flex-col items-center space-y-6 text-center">
-  <div class="text-4xl text-default">Hello, my name is</div>
-  <div class="text-6xl font-black hero-text stroke-red-100 stroke-2">Kyle Carhart</div>
-</div>
+<Centered className="flex flex-col items-center space-y-6 text-center">
+  <div class="sm:text-4xl text-3xl text-default">Hello, my name is</div>
+  <div class="sm:text-6xl text-5xl font-black hero-text stroke-red-100 stroke-2">Kyle Carhart</div>
+</Centered>
 
 <style>
   .hero-text {

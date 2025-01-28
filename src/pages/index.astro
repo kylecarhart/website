@@ -19,7 +19,7 @@ import Github from "../../public/github.svg";
   <div class="mt-16 mb-32">
     <Hero />
   </div>
-  <div class="space-y-32">
+  <div class="space-y-16 sm:space-y-32">
     <!-- Who I Am -->
      <Centered>
        <Heading title="who i am">
@@ -31,7 +31,7 @@ import Github from "../../public/github.svg";
 
     <!-- Companies -->
      <div class="opacity-80 bg-default/5">
-       <Centered className="flex gap-16 flex-wrap justify-center py-32">
+       <Centered className="flex gap-16 flex-wrap justify-center sm:py-32 py-16">
          {companies.map((company) => {
            const { Logo } = company;
            return (
