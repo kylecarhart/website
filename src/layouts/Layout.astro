@@ -12,12 +12,16 @@ export type Props = HeadTags;
 const headTags = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <SEOTags {...headTags} />
   <body class="background min-h-screen text-default font-sans">
     <!-- TODO: Remove when done -->
-    <div class="text-center text-sm py-[2px] bg-rose-500/10 border-b border-rose-500/15 text-rose-800 font-mono italic">under construction! 🔨</div>
+    <div
+      class="text-center text-sm py-[2px] bg-rose-500/10 border-b border-rose-500/15 text-rose-800 font-mono italic"
+    >
+      under construction! 🚀
+    </div>
     <Centered>
       <Nav />
     </Centered>
@@ -25,12 +29,17 @@ const headTags = Astro.props;
   </body>
 </html>
 
-
 <style>
-.background {
-  background-image: url('/29.svg'), linear-gradient(90deg, rgba(2,0,36,0.02) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.02) 100%);
-  background-color: #FAFAFA;
-  background-size: 15px, 100%;
-}
+  .background {
+    background-image: url("/29.svg"),
+      linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 0.02) 0%,
+        rgba(0, 0, 0, 0) 10%,
+        rgba(0, 0, 0, 0) 90%,
+        rgba(0, 0, 0, 0.02) 100%
+      );
+    background-color: #fafafa;
+    background-size: 15px, 100%;
+  }
 </style>
-
