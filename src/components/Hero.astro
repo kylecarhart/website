@@ -1,11 +1,14 @@
 ---
 import Centered from "@/layouts/Centered.astro";
-
 ---
 
-<Centered className="flex flex-col items-center space-y-6 text-center">
+<Centered class="flex flex-col items-center space-y-6 text-center">
   <div class="sm:text-4xl text-3xl text-default">Hello, my name is</div>
-  <div class="sm:text-6xl text-5xl font-black hero-text stroke-red-100 stroke-2">Kyle Carhart</div>
+  <div
+    class="sm:text-6xl text-5xl font-black hero-text stroke-red-100 stroke-2"
+  >
+    Kyle Carhart
+  </div>
 </Centered>
 
 <style>
@@ -13,6 +16,6 @@ import Centered from "@/layouts/Centered.astro";
     color: rgba(255, 255, 255, 100);
     -webkit-text-stroke: 2px var(--color-primary);
     text-shadow: 0 0 8px var(--color-primary);
-    paint-order: stroke fill; 
+    paint-order: stroke fill;
   }
 </style>

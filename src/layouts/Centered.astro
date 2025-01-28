@@ -1,11 +1,7 @@
 ---
 import { cn } from "@/utils/cn";
 
-export type Props = {
-  className?: string;
-};
-
-const { className } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
 <div class={cn("max-w-main mx-auto px-4 sm:px-8", className)}>

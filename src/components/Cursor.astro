@@ -1,0 +1,94 @@
+---
+import { cn } from "@/utils/cn";
+import CursorIcon from "../../public/cursor.svg?raw";
+
+interface Props {
+  /** The name of the cursor */
+  name: string;
+  /** The speed of the cursor, in seconds */
+  speed?: number;
+  /** The minimum delay of random movement, in ms */
+  minDelay?: number;
+  /** The maximum delay of random movement, in ms */
+  maxDelay?: number;
+  /** Whether to animate the cursor */
+  isAnimateOn?: boolean;
+  /** The class name to apply to the cursor */
+  class?: string;
+  /** Whether to render the cursor on top of the content */
+  isOnTop?: boolean;
+}
+
+const {
+  name,
+  speed = 0.8,
+  minDelay = 2000,
+  maxDelay = 5000,
+  isAnimateOn = true,
+  isOnTop = true,
+  class: className,
+} = Astro.props;
+
+const transition = `transform ${speed}s ease-in-out`;
+---
+
+<div class={cn("relative", className)}>
+  <slot />
+  <!-- Cursor -->
+  <div
+    id="cursor"
+    class:list={[
+      "absolute inline-block top-0 left-0",
+      isOnTop ? "z-10" : "-z-10",
+    ]}
+  >
+    <div class="w-6 h-6 absolute -top-4 -left-4 text-blue-600">
+      <Fragment set:html={CursorIcon} />
+    </div>
+    <div
+      class="bg-blue-500 border-3 border-blue-600 inline-block px-3 py-1 text-sm font-medium font-mono text-white rounded-r-full rounded-bl-full"
+    >
+      {name}
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ transition }}>
+  #cursor {
+    transition: var(--transition);
+  }
+</style>
+
+<script define:vars={{ minDelay, maxDelay, isAnimateOn }}>
+  const cursor = document.querySelector("#cursor");
+
+  // Immediately Invoked Function Expression
+  (function animate(ms = 1000) {
+    if (!isAnimateOn) {
+      return;
+    }
+
+    setTimeout(() => {
+      // Randomly pick a top and left position
+      const top = Math.random() * 100;
+      const left = Math.random() * 100;
+
+      // Get the parent element's width and height, minus the cursor's width and height
+      const parentWidth = cursor.parentElement.clientWidth - cursor.clientWidth;
+      const parentHeight =
+        cursor.parentElement.clientHeight - cursor.clientHeight;
+
+      console.log(parentWidth, parentHeight);
+
+      // Calculate the x and y positions based on the parent element's size
+      const x = (left * parentWidth) / 100;
+      const y = (top * parentHeight) / 100;
+
+      // Set the cursor's position
+      if (cursor) {
+        cursor.style.transform = `translate(${x}px, ${y}px)`;
+        animate(Math.random() * (maxDelay - minDelay) + minDelay);
+      }
+    }, ms);
+  })();
+</script>

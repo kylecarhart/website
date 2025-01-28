@@ -1,5 +1,6 @@
 ---
 import Button from "@/components/Button.astro";
+import Cursor from "@/components/Cursor.astro";
 import Footer from "@/components/Footer.astro";
 import Heading from "@/components/Heading.astro";
 import Hero from "@/components/Hero.astro";
@@ -12,91 +13,102 @@ import Centered from "@/layouts/Centered.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Download } from "lucide-react";
 import Github from "../../public/github.svg";
-
 ---
 
 <Layout>
+  <!-- Hero -->
   <div class="mt-16 mb-32">
     <Hero />
   </div>
+
   <div class="space-y-16 sm:space-y-32">
     <!-- Who I Am -->
-     <Centered>
-       <Heading title="who i am">
-         <Fragment slot="description">
-           I am a <strong>Senior Full Stack Developer</strong> from Fayetteville, NC with over 6 years of professional experience delivering robust, quality user experiences using a vast range of technologies and frameworks.
-         </Fragment>
-       </Heading>
-     </Centered>
+    <Centered>
+      <Heading title="who i am">
+        <Fragment slot="description">
+          I am a <strong>Senior Full Stack Developer</strong> from Fayetteville,
+          NC with over 6 years of professional experience delivering robust, quality
+          user experiences using a vast range of technologies and frameworks.
+        </Fragment>
+      </Heading>
+    </Centered>
 
     <!-- Companies -->
-     <div class="opacity-80 bg-default/5">
-       <Centered className="flex gap-16 flex-wrap justify-center sm:py-32 py-16">
-         {companies.map((company) => {
-           const { Logo } = company;
-           return (
-            // @ts-ignore
-             <Logo class="h-10" />
-           )
-         })}
-       </Centered>
-     </div>
-
+    <Cursor name="Kyle Carhart" isAnimateOn={true} isOnTop={false}>
+      <div class="opacity-80 bg-default/5">
+        <Centered class="flex gap-16 flex-wrap justify-center sm:py-32 py-16">
+          {
+            companies.map((company) => {
+              const { Logo } = company;
+              return (
+                // @ts-ignore
+                <Logo class="h-10" />
+              );
+            })
+          }
+        </Centered>
+      </div>
+    </Cursor>
 
     <!-- What I Know -->
-     <Centered>
-       <Heading title="what i know" align="right">
-         <Fragment slot="description">
-           These are just some of my favorite tools to get things done.
-         </Fragment>
-         <div class="grid grid-cols-3 sm:grid-cols-4 gap-8">
-           <SkillList title="Languages" skills={skills.languages} />
-           <SkillList title="Frontend" skills={skills.frontend} />
-           <SkillList title="Backend" skills={skills.backend} />
-           <SkillList title="Libraries" skills={skills.libraries} />
-           <SkillList title="Cloud" skills={skills.cloud} />
-           <SkillList title="Tools" skills={skills.tools} />
-           <SkillList title="Database" skills={skills.database} />
-           <SkillList title="Specs" skills={skills.specs} />
-         </div>
-       </Heading>
-     </Centered>
-    
+    <Centered>
+      <Heading title="what i know" align="right">
+        <Fragment slot="description">
+          These are just some of my favorite tools to get things done.
+        </Fragment>
+        <div class="grid grid-cols-3 sm:grid-cols-4 gap-8">
+          <SkillList title="Languages" skills={skills.languages} />
+          <SkillList title="Frontend" skills={skills.frontend} />
+          <SkillList title="Backend" skills={skills.backend} />
+          <SkillList title="Libraries" skills={skills.libraries} />
+          <SkillList title="Cloud" skills={skills.cloud} />
+          <SkillList title="Tools" skills={skills.tools} />
+          <SkillList title="Database" skills={skills.database} />
+          <SkillList title="Specs" skills={skills.specs} />
+        </div>
+      </Heading>
+    </Centered>
+
     <!-- What I've Done -->
-     <Centered>
-       <Heading title="what i've done" url="https://www.youtube.com/watch?v=Jrprk5dNboI&t=105s">
-         <Fragment slot="description">
-           Check out some of these cool side projects I have worked on.
-         </Fragment>
-         <div class="space-y-8">
+    <Centered>
+      <Heading
+        title="what i've done"
+        url="https://www.youtube.com/watch?v=Jrprk5dNboI&t=105s"
+      >
+        <Fragment slot="description">
+          Check out some of these cool side projects I have worked on.
+        </Fragment>
+        <div class="space-y-8">
           <Project project={projects.runner}>
-           <div class="flex gap-4">
-             <Button href="https://github.com/kylecarhart/Runner">
-               <Github class="w-4 h-4" slot="icon" /> Github
-             </Button>
-           </div>
+            <div class="flex gap-4">
+              <Button href="https://github.com/kylecarhart/Runner">
+                <Github class="w-4 h-4" slot="icon" /> Github
+              </Button>
+            </div>
           </Project>
           <Project project={projects.domainFilter}>
-           <div class="flex gap-4">
-             <Button href="https://github.com/kylecarhart/Google-Domain-Filter">
-               <Github class="w-4 h-4" slot="icon" /> Github
-             </Button>
-             <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
+            <div class="flex gap-4">
+              <Button
+                href="https://github.com/kylecarhart/Google-Domain-Filter"
+              >
+                <Github class="w-4 h-4" slot="icon" /> Github
+              </Button>
+              <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
                <Download className="w-4 h-4" slot="icon" /> Chrome
              </Button> -->
-             <Button href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/">
-               <Download className="w-4 h-4" slot="icon" /> Firefox
-             </Button>
-           </div>
+              <Button
+                href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/"
+              >
+                <Download className="w-4 h-4" slot="icon" /> Firefox
+              </Button>
+            </div>
           </Project>
-         </div>
-       </Heading>
-     </Centered>
+        </div>
+      </Heading>
+    </Centered>
   </div>
 
   <div class="mt-32">
     <Footer />
   </div>
 </Layout>
-
-
