@@ -3,6 +3,7 @@ import Nav from "@/components/Nav.astro";
 import SEOTags from "@/components/seo/SEOTags.astro";
 import type { HeadTags } from "@/utils/types/HeadTags";
 
+import Cursor from "@/components/Cursor.astro";
 import "@/styles/globals.css";
 import "@/styles/tailwind.css";
 import Centered from "./Centered.astro";
@@ -25,7 +26,14 @@ const headTags = Astro.props;
     <Centered>
       <Nav />
     </Centered>
-    <slot />
+    <Cursor
+      name="Kyle"
+      startPosition="middle"
+      isOnTop={false}
+      class="opacity-0 sm:opacity-100"
+    >
+      <slot />
+    </Cursor>
   </body>
 </html>
 

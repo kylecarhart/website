@@ -8,18 +8,26 @@ import CursorIcon from "../../public/cursor.svg?raw";
 interface Props {
   /** The name of the cursor */
   name: string;
-  /** The speed of the cursor, in seconds */
+  /** The speed of the cursor, in seconds. Defaults to 0.8. */
   speed?: number;
-  /** The minimum delay of random movement, in ms */
+  /** The minimum delay of random movement, in ms. Defaults to 2000. */
   minDelay?: number;
-  /** The maximum delay of random movement, in ms */
+  /** The maximum delay of random movement, in ms. Defaults to 5000. */
   maxDelay?: number;
-  /** Whether to animate the cursor */
+  /** Whether to animate the cursor. Defaults to true. */
   isAnimateOn?: boolean;
+  /** Whether to render the cursor on top of the content. Defaults to true. */
+  isOnTop?: boolean;
+  /** The method to animate the cursor. Defaults to "wander". */
+  method?: "random" | "wander";
+  /** The minimum distance to wander, as a ratio between 0 and 1. Defaults to 0.1. */
+  minDistance?: number;
+  /** The maximum distance to wander, as a ratio between 0 and 1. Defaults to 0.3. */
+  maxDistance?: number;
+  /** The starting position of the cursor. Defaults to "base". */
+  startPosition?: "base" | "middle";
   /** The class name to apply to the cursor */
   class?: string;
-  /** Whether to render the cursor on top of the content */
-  isOnTop?: boolean;
 }
 
 const {
@@ -29,21 +37,26 @@ const {
   maxDelay = 5000,
   isAnimateOn = true,
   isOnTop = true,
+  method = "wander",
+  minDistance = 0.1,
+  maxDistance = 0.3,
+  startPosition = "base",
   class: className,
 } = Astro.props;
 
 const transition = `transform ${speed}s ease-in-out`;
 ---
 
-<div class={cn("relative", className)}>
+<div class="relative">
   <slot />
   <!-- Cursor -->
   <div
     id="cursor"
-    class:list={[
+    class={cn(
       "absolute inline-block top-0 left-0",
       isOnTop ? "z-10" : "-z-10",
-    ]}
+      className
+    )}
   >
     <div class="w-6 h-6 absolute -top-4 -left-4 text-blue-600">
       <Fragment set:html={CursorIcon} />
@@ -58,12 +71,41 @@ const transition = `transform ${speed}s ease-in-out`;
 
 <style define:vars={{ transition }}>
   #cursor {
+    display: none;
     transition: var(--transition);
+  }
+
+  #cursor.visible {
+    display: block;
   }
 </style>
 
-<script define:vars={{ minDelay, maxDelay, isAnimateOn }}>
+<script
+  is:inline
+  define:vars={{
+    minDelay,
+    maxDelay,
+    isAnimateOn,
+    method,
+    minDistance,
+    maxDistance,
+    startPosition,
+  }}
+>
   const cursor = document.querySelector("#cursor");
+  const parent = cursor?.parentElement;
+
+  let x = 0;
+  let y = 0;
+
+  if (startPosition === "middle") {
+    x = parent.clientWidth / 2;
+    y = parent.clientHeight / 2;
+    cursor.style.transform = `translate(${x}px, ${y}px)`;
+    cursor.classList.add("visible");
+  } else {
+    cursor.classList.add("visible");
+  }
 
   // Immediately Invoked Function Expression
   (function animate(ms = 1000) {
@@ -72,26 +114,72 @@ const transition = `transform ${speed}s ease-in-out`;
     }
 
     setTimeout(() => {
-      // Randomly pick a top and left position
-      const top = Math.random() * 100;
-      const left = Math.random() * 100;
-
-      // Get the parent element's width and height, minus the cursor's width and height
-      const parentWidth = cursor.parentElement.clientWidth - cursor.clientWidth;
-      const parentHeight =
-        cursor.parentElement.clientHeight - cursor.clientHeight;
-
-      console.log(parentWidth, parentHeight);
-
-      // Calculate the x and y positions based on the parent element's size
-      const x = (left * parentWidth) / 100;
-      const y = (top * parentHeight) / 100;
-
-      // Set the cursor's position
-      if (cursor) {
-        cursor.style.transform = `translate(${x}px, ${y}px)`;
-        animate(Math.random() * (maxDelay - minDelay) + minDelay);
+      if (method === "random") {
+        ({ x, y } = random());
+      } else if (method === "wander") {
+        ({ x, y } = wander());
       }
+
+      cursor.style.transform = `translate(${x}px, ${y}px)`;
+      return animate(Math.random() * (maxDelay - minDelay) + minDelay);
     }, ms);
   })();
+
+  /**
+   * Randomly pick a top and left position within the parent element.
+   */
+  function random() {
+    // Randomly pick a top and left position
+    const top = Math.random() * 100;
+    const left = Math.random() * 100;
+
+    // Get the parent element's width and height, minus the cursor's width and height
+    const parentWidth = cursor.parentElement.clientWidth - cursor.clientWidth;
+    const parentHeight =
+      cursor.parentElement.clientHeight - cursor.clientHeight;
+
+    console.log(parentWidth, parentHeight);
+
+    // Calculate the x and y positions based on the parent element's size
+    x = (left * parentWidth) / 100;
+    y = (top * parentHeight) / 100;
+
+    return { x, y };
+  }
+
+  /**
+   * Wander around the parent element in a random direction using percentages of container size.
+   */
+  function wander() {
+    // Get parent boundaries
+    const parentWidth = cursor.parentElement.clientWidth - cursor.clientWidth;
+    const parentHeight =
+      cursor.parentElement.clientHeight - cursor.clientHeight;
+
+    // Get the smallest container dimension
+    const minContainerSize = Math.min(parentWidth, parentHeight);
+
+    // Pick random angle and normalized distance
+    const angle = Math.random() * 2 * Math.PI;
+    const distance =
+      (Math.random() * (maxDistance - minDistance) + minDistance) *
+      minContainerSize;
+
+    let newX = x + Math.cos(angle) * distance;
+    let newY = y + Math.sin(angle) * distance;
+
+    // If outside bounds, reverse direction
+    if (newX < 0 || newX > parentWidth) {
+      newX = x - Math.cos(angle) * distance;
+    }
+    if (newY < 0 || newY > parentHeight) {
+      newY = y - Math.sin(angle) * distance;
+    }
+
+    // Ensure final position is within bounds
+    x = Math.max(0, Math.min(newX, parentWidth));
+    y = Math.max(0, Math.min(newY, parentHeight));
+
+    return { x, y };
+  }
 </script>
