@@ -16,8 +16,6 @@ interface Props {
   maxDelay?: number;
   /** Whether to animate the cursor. Defaults to true. */
   isAnimateOn?: boolean;
-  /** Whether to render the cursor on top of the content. Defaults to true. */
-  isOnTop?: boolean;
   /** The method to animate the cursor. Defaults to "wander". */
   method?: "random" | "wander";
   /** The minimum distance to wander, as a ratio between 0 and 1. Defaults to 0.1. */
@@ -26,6 +24,8 @@ interface Props {
   maxDistance?: number;
   /** The starting position of the cursor. Defaults to "base". */
   startPosition?: "base" | "middle";
+  /** Whether to chase the cursor. Defaults to false. */
+  isChaseOn?: boolean;
   /** The class name to apply to the cursor */
   class?: string;
 }
@@ -36,11 +36,11 @@ const {
   minDelay = 2000,
   maxDelay = 5000,
   isAnimateOn = true,
-  isOnTop = true,
   method = "wander",
   minDistance = 0.1,
   maxDistance = 0.3,
   startPosition = "base",
+  isChaseOn = false,
   class: className,
 } = Astro.props;
 
@@ -52,11 +52,7 @@ const transition = `transform ${speed}s ease-in-out`;
   <!-- Cursor -->
   <div
     id="cursor"
-    class={cn(
-      "absolute inline-block top-0 left-0",
-      isOnTop ? "z-10" : "-z-10",
-      className
-    )}
+    class={cn("absolute inline-block top-0 left-0 z-10 select-none", className)}
   >
     <div class="w-6 h-6 absolute -top-4 -left-4 text-blue-600">
       <Fragment set:html={CursorIcon} />
@@ -90,6 +86,7 @@ const transition = `transform ${speed}s ease-in-out`;
     minDistance,
     maxDistance,
     startPosition,
+    isChaseOn,
   }}
 >
   const cursor = document.querySelector("#cursor");
@@ -107,23 +104,47 @@ const transition = `transform ${speed}s ease-in-out`;
     cursor.classList.add("visible");
   }
 
-  // Immediately Invoked Function Expression
-  (function animate(ms = 1000) {
+  let nextMoveTimeout;
+
+  /**
+   * Chase the cursor around
+   */
+  if (isChaseOn) {
+    cursor.addEventListener("mouseenter", () => {
+      clearTimeout(nextMoveTimeout);
+      move();
+      return animate(Math.random() * (maxDelay - minDelay) + minDelay);
+    });
+  }
+
+  /**
+   * Animate the cursor to a new position.
+   * @param ms - The delay between moves, in ms. Defaults to 1000.
+   */
+  function animate(ms = 1000) {
     if (!isAnimateOn) {
       return;
     }
 
-    setTimeout(() => {
-      if (method === "random") {
-        ({ x, y } = random());
-      } else if (method === "wander") {
-        ({ x, y } = wander());
-      }
-
-      cursor.style.transform = `translate(${x}px, ${y}px)`;
+    nextMoveTimeout = setTimeout(() => {
+      move();
       return animate(Math.random() * (maxDelay - minDelay) + minDelay);
     }, ms);
-  })();
+  }
+
+  /**
+   * Move the cursor to a new position.
+   */
+  function move() {
+    if (method === "random") {
+      ({ x, y } = random());
+    } else if (method === "wander") {
+      ({ x, y } = wander());
+    }
+    cursor.style.transform = `translate(${x}px, ${y}px)`;
+  }
+
+  animate();
 
   /**
    * Randomly pick a top and left position within the parent element.
@@ -148,7 +169,8 @@ const transition = `transform ${speed}s ease-in-out`;
   }
 
   /**
-   * Wander around the parent element in a random direction using percentages of container size.
+   * Wander around the parent element in a random direction using percentages of
+   * the container size.
    */
   function wander() {
     // Get parent boundaries
