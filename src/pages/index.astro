@@ -78,25 +78,33 @@ import Github from "../../public/github.svg";
         <div class="space-y-8">
           <Project project={projects.runner}>
             <div class="flex gap-4">
-              <Button href="https://github.com/kylecarhart/Runner">
-                <Github class="w-4 h-4" slot="icon" /> Github
+              <Button
+                size="small"
+                href="https://github.com/kylecarhart/Runner"
+                openInNewTab={true}
+              >
+                <Github class="w-4 h-4" /> Github
               </Button>
             </div>
           </Project>
           <Project project={projects.domainFilter}>
             <div class="flex gap-4">
               <Button
+                size="small"
                 href="https://github.com/kylecarhart/Google-Domain-Filter"
+                openInNewTab={true}
               >
-                <Github class="w-4 h-4" slot="icon" /> Github
+                <Github class="w-4 h-4" /> Github
               </Button>
               <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
-               <Download className="w-4 h-4" slot="icon" /> Chrome
+               <Download className="w-4 h-4" /> Chrome
              </Button> -->
               <Button
+                size="small"
                 href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/"
+                openInNewTab={true}
               >
-                <Download className="w-4 h-4" slot="icon" /> Firefox
+                <Download className="w-4 h-4" /> Firefox
               </Button>
             </div>
           </Project>

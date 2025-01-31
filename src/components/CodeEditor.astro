@@ -1,0 +1,26 @@
+---
+import { Code } from "astro:components";
+---
+
+<div
+  class="font-mono outline-1 outline-default rounded-lg flex flex-col p-4 shadow-default/20 shadow-[0_0_30px]"
+>
+  <!-- Title Bar -->
+  <div class="flex gap-2 justify-end">
+    <div class="h-4 w-4 bg-red-500 rounded-full"></div>
+    <div class="h-4 w-4 bg-yellow-500 rounded-full"></div>
+    <div class="h-4 w-4 bg-green-500 rounded-full"></div>
+  </div>
+
+  <!-- Editor -->
+  <Code
+    code={`function hello() {
+  console.log("Hello, world!");
+}
+`}
+    lang="js"
+    style="background:transparent; font-size:20px"
+  />
+</div>
+
+<script></script>
