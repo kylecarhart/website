@@ -2,15 +2,12 @@
 import Centered from "@/layouts/Centered.astro";
 import { Mail } from "lucide-react";
 import Button from "./Button.astro";
+import HeroText from "./HeroText.astro";
 ---
 
 <Centered class="flex flex-col items-center gap-6 text-center">
   <div class="sm:text-4xl text-3xl text-default">Hello, my name is</div>
-  <div
-    class="sm:text-6xl text-5xl font-black hero-text stroke-red-100 stroke-2"
-  >
-    Kyle Carhart
-  </div>
+  <HeroText>Kyle Carhart.</HeroText>
   <div class="sm:text-xl text-lg text-default font-light max-w-lg mt-4">
     I build elegant, high-performance web applications with modern technologies.
   </div>
@@ -21,13 +18,3 @@ import Button from "./Button.astro";
     </Button>
   </div>
 </Centered>
-
-<style>
-  .hero-text {
-    color: rgba(255, 255, 255, 100);
-    -webkit-text-stroke: 2px var(--color-primary);
-    /* filter: drop-shadow(0 0 8px var(--color-primary)); */
-    text-shadow: 0 0 8px var(--color-primary);
-    paint-order: stroke fill;
-  }
-</style>

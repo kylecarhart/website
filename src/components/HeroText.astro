@@ -1,0 +1,16 @@
+---
+
+---
+
+<div class="sm:text-6xl text-5xl font-black hero-text text-white">
+  <slot />
+</div>
+
+<style>
+  .hero-text {
+    -webkit-text-stroke: 2px var(--color-primary);
+    /* filter: drop-shadow(0 0 8px var(--color-primary)); */
+    text-shadow: 0 0 8px var(--color-primary);
+    paint-order: stroke fill;
+  }
+</style>

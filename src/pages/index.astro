@@ -3,6 +3,7 @@ import Button from "@/components/Button.astro";
 import Footer from "@/components/Footer.astro";
 import Heading from "@/components/Heading.astro";
 import Hero from "@/components/Hero.astro";
+import HeroText from "@/components/HeroText.astro";
 import Project from "@/components/Project.astro";
 import SkillList from "@/components/SkillList.astro";
 import { companies } from "@/data/experience";
@@ -10,7 +11,7 @@ import projects from "@/data/projects";
 import { skills } from "@/data/skills";
 import Centered from "@/layouts/Centered.astro";
 import Layout from "@/layouts/Layout.astro";
-import { Download } from "lucide-react";
+import { Download, Mail, Network } from "lucide-react";
 import Github from "../../public/github.svg";
 ---
 
@@ -111,9 +112,32 @@ import Github from "../../public/github.svg";
         </div>
       </Heading>
     </Centered>
+
+    <Centered class="my-42">
+      <div id="contact" class="text-center space-y-6 mx-auto">
+        <HeroText>Lets chat.</HeroText>
+        <div class="sm:text-xl text-lg text-default font-light">
+          Want to build something great? Lets do it.<br />You can find me via
+          these channels:
+        </div>
+        <div class="inline-flex gap-4 mt-4 flex-wrap justify-center">
+          <Button variant="primary" href="mailto:inquiry@carh.art">
+            <Mail className="w-5 h-5" />
+            inquiry@carh.art
+          </Button>
+          <Button
+            href="https://www.linkedin.com/in/kyle-carhart"
+            openInNewTab={true}
+          >
+            <Network className="w-5 h-5" />
+            LinkedIn
+          </Button>
+        </div>
+      </div>
+    </Centered>
   </div>
 
-  <div class="mt-32">
+  <div>
     <Footer />
   </div>
 </Layout>

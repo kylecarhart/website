@@ -1,5 +1,4 @@
 ---
-
 /**
  *  Heading component for the home page.
  *  @param {string} title - The title of the heading.
@@ -8,22 +7,38 @@
 interface Props {
   title: string;
   url?: string;
-  align?: 'left' | 'right';
+  align?: "left" | "right";
 }
 
-const { title, align = 'left', url } = Astro.props;
+const { title, align = "left", url } = Astro.props;
 ---
 
 <div class="space-y-12 heading">
-  <div class:list={[
-    'flex',
-    {"sm:-mr-8 text-right flex-row-reverse": align === 'right'}, 
-    {"sm:-ml-8 text-left": align === 'left'}
-  ]}>
-    <div class="hidden sm:block text-primary font-mono font-bold w-8 text-center text-3xl">+</div>
+  <div
+    class:list={[
+      "flex",
+      { "sm:-mr-8 text-right flex-row-reverse": align === "right" },
+      { "sm:-ml-8 text-left": align === "left" },
+    ]}
+  >
+    <div
+      class="hidden sm:block text-primary font-mono font-bold w-8 text-center text-3xl"
+    >
+      +
+    </div>
     <div class="space-y-4">
-      <h2 class="font-mono italic sm:text-4xl text-3xl">{url ? <a href={url} target="_blank" rel="noopener noreferrer">{title}</a> : title}</h2>
-      <p class="sm:text-xl text-lg max-w-prose"><slot name="description"/></p>
+      <h2 class="font-mono italic sm:text-4xl text-3xl">
+        {
+          url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {title}
+            </a>
+          ) : (
+            title
+          )
+        }
+      </h2>
+      <p class="sm:text-xl text-lg max-w-prose"><slot name="description" /></p>
     </div>
   </div>
   <slot />
@@ -43,19 +58,22 @@ const { title, align = 'left', url } = Astro.props;
   }
 </style>
 
-
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-fade-in');
-      }
-    });
-  }, { threshold: .25 });
+  // Intersection observer to animate the heading when it enters the viewport.
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-fade-in");
+        }
+      });
+    },
+    { threshold: 0.25 }
+  );
 
   // Scripts are only ran once, not per usage of the component, so we need to
   // handle any AND all headings on the page.
-  const headings = document.querySelectorAll('.heading');
+  const headings = document.querySelectorAll(".heading");
 
   if (headings) {
     headings.forEach((heading) => {
