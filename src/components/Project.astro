@@ -9,14 +9,31 @@ const { project } = Astro.props;
 ---
 
 <div class="flex gap-4">
-  <div class="w-1 bg-primary rounded-full"></div> {/* Vertical line */}
+  <div class="w-1 bg-primary rounded-full"></div>
+  {/* Vertical line */}
   <div class="space-y-4">
-    <a class="sm:text-2xl text-xl font-semibold block" href={project.url} target="_blank" rel="noopener noreferrer">{project.title}</a>
+    <a
+      class="sm:text-2xl text-xl font-semibold inline-block"
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer">{project.title}</a
+    >
     <div class="sm:text-lg max-w-prose">{project.description}</div>
     <ul class="flex flex-wrap">
-      {project.tech.map((tech) => (
-        <li class="text-sm font-mono not-last:after:content-['·'] not-last:after:mx-1"><a class="hover:underline" href={tech.url} target="_blank" rel="noopener noreferrer">{tech.name}</a></li>
-      ))}
+      {
+        project.tech.map((tech) => (
+          <li class="text-sm font-mono not-last:after:content-['·'] not-last:after:mx-1">
+            <a
+              class="hover:underline"
+              href={tech.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {tech.name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
     <slot />
   </div>
