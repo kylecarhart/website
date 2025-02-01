@@ -1,6 +1,6 @@
 ---
-import type { Tech } from '@/data/tech';
-import { Check } from 'lucide-react';
+import type { Tech } from "@/data/tech";
+import { Check } from "lucide-react";
 
 interface Props {
   title: string;
@@ -10,20 +10,25 @@ interface Props {
 const { title, skills } = Astro.props;
 ---
 
-
 <div class="flex flex-col gap-2">
   <span class="font-mono font-semibold italic text-xs">{title}</span>
   <ul class="space-y-2">
-    {skills.map(({name, proficient, url}) => (
-      <li class:list={[
-        'flex items-center gap-2',
-        {
-          'text-primary font-semibold': proficient,
-        }
-      ]}>
-        <Check className="w-4 h-4 shrink-0"/>
-        <a class="hover:underline" href={url} target="_blank" rel="noopener noreferrer">{name}</a>
-      </li>
-    ))}
+    {
+      skills.map(({ name, proficient, url }) => (
+        <li
+          class:list={[
+            "flex items-center gap-2",
+            {
+              "text-primary font-semibold": proficient,
+            },
+          ]}
+        >
+          <Check className="w-4 h-4 shrink-0" />
+          <a class="hover:underline" href={url}>
+            {name}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </div>
