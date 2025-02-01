@@ -1,5 +1,6 @@
 ---
-import Button from "@/components/Button.astro";
+import CopyButton from "@/components/button/CopyButton";
+import Button from "@/components/button/LinkButton.astro";
 import Footer from "@/components/Footer.astro";
 import Heading from "@/components/Heading.astro";
 import Hero from "@/components/Hero.astro";
@@ -121,10 +122,10 @@ import Github from "../../public/github.svg";
           these channels:
         </div>
         <div class="inline-flex gap-4 mt-4 flex-wrap justify-center">
-          <Button variant="primary" href="mailto:inquiry@carh.art">
-            <Mail className="w-5 h-5" />
+          <CopyButton client:idle copyText="inquiry@carh.art" variant="primary">
+            <Mail className="w-5 h-4" />
             inquiry@carh.art
-          </Button>
+          </CopyButton>
           <Button
             href="https://www.linkedin.com/in/kyle-carhart"
             openInNewTab={true}
