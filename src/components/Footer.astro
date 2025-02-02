@@ -1,5 +1,53 @@
 ---
+import Centered from "@/layouts/Centered.astro";
+import FooterLinkSection from "./footer/FooterLinkSection.astro";
 
+const siteLinks = [
+  { text: "Home", href: "/" },
+  { text: "Blog", href: "/" },
+];
+
+const socialLinks = [
+  { text: "LinkedIn", href: "https://www.linkedin.com/in/kyle-carhart" },
+  { text: "Github", href: "https://github.com/kylecarhart" },
+  { text: "Bluesky", href: "https://bsky.app/profile/carhart.dev" },
+];
+
+const contactLinks = [
+  { text: "Email: inquiry@carh.art", href: "mailto:inquiry@carh.art" },
+  { text: "Phone: +1 (631) 838-7540", href: "tel:+16318387540" },
+];
 ---
 
-<div class="py-2 bg-primary/30"></div>
+<div class="py-12 bg-[#251528] text-white border-t-2 border-primary">
+  <Centered>
+    <div class="grid sm:grid-cols-2 gap-8">
+      <!-- Newsletter -->
+      <div class="space-y-2">
+        <!-- <div class="font-mono italic text-3xl font-semibold">Newsletter</div>
+        <div>
+          Sign up for the newsletter to stay up to date with whatever
+          shenanigans I am up to.
+        </div>
+        <div class="flex gap-2 my-6">
+          <input
+            type="email"
+            placeholder="Email"
+            class="border border-white rounded-full px-4 py-2 flex-1"
+          />
+          <button class={buttonVariants({ variant: "primary" })}>Sign up</button
+          >
+        </div> -->
+      </div>
+      <div class="grid grid-cols-2 grid-rows-2 gap-4">
+        <FooterLinkSection title="Site Links" links={siteLinks} />
+        <FooterLinkSection title="Socials" links={socialLinks} />
+        <FooterLinkSection
+          class="col-span-2"
+          title="Contact"
+          links={contactLinks}
+        />
+      </div>
+    </div>
+  </Centered>
+</div>

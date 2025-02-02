@@ -18,10 +18,9 @@ import Github from "../../public/github.svg";
 
 <Layout>
   <!-- Hero -->
-  <div class="mt-16 mb-32">
-    <Hero />
-  </div>
+  <Hero class="mt-16 mb-32" />
 
+  <!-- Portfolio -->
   <div class="space-y-16 sm:space-y-32">
     <!-- Who I Am -->
     <Centered>
@@ -114,12 +113,13 @@ import Github from "../../public/github.svg";
       </Heading>
     </Centered>
 
+    <!-- Contact -->
     <Centered class="my-42">
       <div id="contact" class="text-center space-y-6 mx-auto">
         <HeroText>Lets chat.</HeroText>
         <div class="sm:text-xl text-lg text-default font-light">
-          Want to build something great? Lets do it.<br />You can find me via
-          these channels:
+          Want to build something great? Lets get started!<br />For professional
+          inquiries, you can contact me via these channels:
         </div>
         <div class="inline-flex gap-4 mt-4 flex-wrap justify-center">
           <CopyButton client:idle copyText="inquiry@carh.art" variant="primary">
@@ -137,8 +137,6 @@ import Github from "../../public/github.svg";
       </div>
     </Centered>
   </div>
-
-  <div>
-    <Footer />
-  </div>
+  <!-- Footer -->
+  <Footer />
 </Layout>

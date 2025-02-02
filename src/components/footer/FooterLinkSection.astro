@@ -1,0 +1,29 @@
+---
+import { cn } from "@/utils/cn";
+
+interface Props {
+  title: string;
+  links: {
+    text: string;
+    href: string;
+  }[];
+  class?: string;
+}
+
+const { title, links, class: className } = Astro.props;
+---
+
+<div class={cn("", className)}>
+  <div class="font-mono italic text-xl font-semibold">{title}</div>
+  <ul>
+    {
+      links.map(({ text, href }) => (
+        <li>
+          <a class="hover:underline" href={href}>
+            {text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

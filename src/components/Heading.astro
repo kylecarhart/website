@@ -28,15 +28,7 @@ const { title, align = "left", url } = Astro.props;
     </div>
     <div class="space-y-4">
       <h2 class="font-mono italic sm:text-4xl text-3xl">
-        {
-          url ? (
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              {title}
-            </a>
-          ) : (
-            title
-          )
-        }
+        {url ? <a href={url}>{title}</a> : title}
       </h2>
       <p class="sm:text-xl text-lg max-w-prose"><slot name="description" /></p>
     </div>

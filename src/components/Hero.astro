@@ -1,11 +1,18 @@
 ---
 import Button from "@/components/button/LinkButton.astro";
 import Centered from "@/layouts/Centered.astro";
+import { cn } from "@/utils/cn";
 import { Mail } from "lucide-react";
 import HeroText from "./HeroText.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
 ---
 
-<Centered class="flex flex-col items-center gap-6 text-center">
+<Centered class={cn("flex flex-col items-center gap-6 text-center", className)}>
   <div class="sm:text-4xl text-3xl text-default">Hello, my name is</div>
   <HeroText>Kyle Carhart.</HeroText>
   <div class="sm:text-xl text-lg text-default font-light max-w-lg mt-4">
