@@ -14,7 +14,9 @@ const { title, links, class: className } = Astro.props;
 ---
 
 <div class={cn("", className)}>
-  <div class="font-mono italic text-xl font-semibold">{title}</div>
+  <div class="font-mono text-xl font-medium">
+    {title}
+  </div>
   <ul>
     {
       links.map(({ text, href }) => (
