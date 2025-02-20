@@ -1,7 +1,10 @@
 ---
 import CopyButton from "@/components/button/CopyButton";
-import Button from "@/components/button/LinkButton.astro";
-import Footer from "@/components/Footer.astro";
+import {
+  default as Button,
+  default as LinkButton,
+} from "@/components/button/LinkButton.astro";
+import Cursor from "@/components/Cursor.astro";
 import Heading from "@/components/Heading.astro";
 import Hero from "@/components/Hero.astro";
 import HeroText from "@/components/HeroText.astro";
@@ -12,131 +15,175 @@ import projects from "@/data/projects";
 import { skills } from "@/data/skills";
 import Centered from "@/layouts/Centered.astro";
 import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { format } from "date-fns";
 import { Download, Mail, Network } from "lucide-react";
 import Github from "../../public/github.svg";
+
+const posts = await getCollection("blog");
 ---
 
 <Layout>
-  <!-- Hero -->
-  <Hero class="mt-16 mb-32" />
+  <Cursor
+    name="Kyle"
+    startPosition="middle"
+    isChaseOn={true}
+    class="opacity-0 sm:opacity-100"
+  >
+    <!-- Hero -->
+    <Hero class="mt-16 mb-32" />
 
-  <!-- Portfolio -->
-  <div class="space-y-16 sm:space-y-48">
-    <!-- Who I Am -->
-    <Centered>
-      <Heading title="who i am">
-        <Fragment slot="description">
-          I am a <strong>Senior Full Stack Developer</strong> from Fayetteville,
-          NC with over 6 years of professional experience delivering robust, quality
-          user experiences using a vast range of technologies and frameworks.
-        </Fragment>
-      </Heading>
-    </Centered>
-
-    <!-- Companies -->
-    <div class="opacity-80 bg-default/5">
-      <Centered class="flex gap-16 flex-wrap justify-center sm:py-32 py-16">
-        {
-          companies.map((company) => {
-            const { Logo } = company;
-            return (
-              // @ts-ignore
-              <Logo class="h-10" />
-            );
-          })
-        }
+    <!-- Portfolio -->
+    <div class="space-y-16 sm:space-y-48">
+      <!-- Who I Am -->
+      <Centered>
+        <Heading title="who i am">
+          <Fragment slot="description">
+            I am a <strong>Senior Full Stack Developer</strong> from Fayetteville,
+            NC with over 6 years of professional experience delivering robust, quality
+            user experiences using a vast range of technologies and frameworks.
+          </Fragment>
+        </Heading>
       </Centered>
-    </div>
 
-    <!-- What I Know -->
-    <Centered>
-      <Heading title="what i know" align="right">
-        <Fragment slot="description">
-          These are just some of my favorite tools to get things done.
-        </Fragment>
-        <div class="grid grid-cols-3 sm:grid-cols-4 gap-8">
-          <SkillList title="Languages" skills={skills.languages} />
-          <SkillList title="Frontend" skills={skills.frontend} />
-          <SkillList title="Backend" skills={skills.backend} />
-          <SkillList title="Libraries" skills={skills.libraries} />
-          <SkillList title="Cloud" skills={skills.cloud} />
-          <SkillList title="Tools" skills={skills.tools} />
-          <SkillList title="Database" skills={skills.database} />
-          <SkillList title="Specs" skills={skills.specs} />
-        </div>
-      </Heading>
-    </Centered>
+      <!-- Blog -->
+      <Centered>
+        <Heading title="what i've written" align="left">
+          <Fragment slot="description">
+            Cozy up with a nice read from one of my latest blog posts.
+          </Fragment>
+          <div class="grid md:grid-cols-2 gap-8">
+            {
+              posts.slice(0, 2).map(({ data, id }) => (
+                <div class="space-y-6 inline-block p-8 border border-default rounded-3xl shadow-lg">
+                  <a href={`blog/${id}`} class="text-xl font-semibold block">
+                    {data.title}
+                  </a>
+                  <div>{data.description}</div>
+                  <div class="text-right [word-spacing:0.2rem]">
+                    {format(data.pubDate, "dd MMM yyyy")}
+                  </div>
+                  <LinkButton
+                    href={`blog/${id}`}
+                    size="small"
+                    class="inline-block"
+                  >
+                    Read more
+                  </LinkButton>
+                </div>
+              ))
+            }
+          </div>
+        </Heading>
+      </Centered>
 
-    <!-- What I've Done -->
-    <Centered>
-      <Heading
-        title="what i've done"
-        url="https://www.youtube.com/watch?v=Jrprk5dNboI&t=105s"
-      >
-        <Fragment slot="description">
-          Check out some of these cool side projects I have worked on.
-        </Fragment>
-        <div class="space-y-8">
-          <Project project={projects.runner}>
-            <div class="flex gap-4">
-              <Button
-                size="small"
-                href="https://github.com/kylecarhart/Runner"
-                openInNewTab={true}
-              >
-                <Github class="w-4 h-4" /> Github
-              </Button>
-            </div>
-          </Project>
-          <Project project={projects.domainFilter}>
-            <div class="flex gap-4">
-              <Button
-                size="small"
-                href="https://github.com/kylecarhart/Google-Domain-Filter"
-                openInNewTab={true}
-              >
-                <Github class="w-4 h-4" /> Github
-              </Button>
-              <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
+      <!-- Companies -->
+      <div class="opacity-80 bg-default/5">
+        <Centered class="flex gap-16 flex-wrap justify-center sm:py-32 py-16">
+          {
+            companies.map((company) => {
+              const { Logo } = company;
+              return (
+                // @ts-ignore
+                <Logo class="h-10" />
+              );
+            })
+          }
+        </Centered>
+      </div>
+
+      <!-- What I Know -->
+      <Centered>
+        <Heading title="what i know" align="right">
+          <Fragment slot="description">
+            These are just some of my favorite tools to get things done.
+          </Fragment>
+          <div class="grid grid-cols-3 sm:grid-cols-4 gap-8">
+            <SkillList title="Languages" skills={skills.languages} />
+            <SkillList title="Frontend" skills={skills.frontend} />
+            <SkillList title="Backend" skills={skills.backend} />
+            <SkillList title="Libraries" skills={skills.libraries} />
+            <SkillList title="Cloud" skills={skills.cloud} />
+            <SkillList title="Tools" skills={skills.tools} />
+            <SkillList title="Database" skills={skills.database} />
+            <SkillList title="Specs" skills={skills.specs} />
+          </div>
+        </Heading>
+      </Centered>
+
+      <!-- What I've Done -->
+      <Centered>
+        <Heading
+          title="what i've done"
+          url="https://www.youtube.com/watch?v=Jrprk5dNboI&t=105s"
+        >
+          <Fragment slot="description">
+            Check out some of these cool side projects I have worked on.
+          </Fragment>
+          <div class="space-y-8">
+            <Project project={projects.runner}>
+              <div class="flex gap-4">
+                <Button
+                  size="small"
+                  href="https://github.com/kylecarhart/Runner"
+                  openInNewTab={true}
+                >
+                  <Github class="w-4 h-4" /> Github
+                </Button>
+              </div>
+            </Project>
+            <Project project={projects.domainFilter}>
+              <div class="flex gap-4">
+                <Button
+                  size="small"
+                  href="https://github.com/kylecarhart/Google-Domain-Filter"
+                  openInNewTab={true}
+                >
+                  <Github class="w-4 h-4" /> Github
+                </Button>
+                <!-- <Button href="https://chromewebstore.google.com/detail/google-domain-filter/kylecarhart">
                <Download className="w-4 h-4" /> Chrome
              </Button> -->
-              <Button
-                size="small"
-                href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/"
-                openInNewTab={true}
-              >
-                <Download className="w-4 h-4" /> Firefox
-              </Button>
-            </div>
-          </Project>
-        </div>
-      </Heading>
-    </Centered>
+                <Button
+                  size="small"
+                  href="https://addons.mozilla.org/en-US/firefox/addon/google-domain-filter/"
+                  openInNewTab={true}
+                >
+                  <Download className="w-4 h-4" /> Firefox
+                </Button>
+              </div>
+            </Project>
+          </div>
+        </Heading>
+      </Centered>
 
-    <!-- Contact -->
-    <Centered class="my-48 sm:my-64">
-      <div id="contact" class="text-center space-y-6 mx-auto">
-        <HeroText>Lets chat.</HeroText>
-        <div class="sm:text-xl text-lg text-default font-light">
-          Want to build something great? Lets get started!<br />For professional
-          inquiries, you can contact me via these channels:
+      <!-- Contact -->
+      <Centered class="my-48 sm:my-64">
+        <div id="contact" class="text-center space-y-6 mx-auto">
+          <HeroText>Lets chat.</HeroText>
+          <div class="sm:text-xl text-lg text-default font-light">
+            Want to build something great? Lets get started!<br />For
+            professional inquiries, you can contact me via these channels:
+          </div>
+          <div class="inline-flex gap-4 mt-4 flex-wrap justify-center">
+            <CopyButton
+              client:idle
+              copyText="inquiry@carh.art"
+              variant="primary"
+            >
+              <Mail className="w-5 h-4" />
+              inquiry@carh.art
+            </CopyButton>
+            <Button
+              href="https://www.linkedin.com/in/kyle-carhart"
+              openInNewTab={true}
+            >
+              <Network className="w-5 h-5" />
+              LinkedIn
+            </Button>
+          </div>
         </div>
-        <div class="inline-flex gap-4 mt-4 flex-wrap justify-center">
-          <CopyButton client:idle copyText="inquiry@carh.art" variant="primary">
-            <Mail className="w-5 h-4" />
-            inquiry@carh.art
-          </CopyButton>
-          <Button
-            href="https://www.linkedin.com/in/kyle-carhart"
-            openInNewTab={true}
-          >
-            <Network className="w-5 h-5" />
-            LinkedIn
-          </Button>
-        </div>
-      </div>
-    </Centered>
-  </div>
-  <!-- Footer -->
-  <Footer />
+      </Centered>
+    </div>
+  </Cursor>
 </Layout>
